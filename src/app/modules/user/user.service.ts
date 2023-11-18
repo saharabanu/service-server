@@ -3,6 +3,9 @@ import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
 import { IUserProfile } from './user.interface';
 import { User } from './user.model';
+import { JwtPayload } from 'jsonwebtoken';
+import config from '../../../config';
+import bcrypt from 'bcrypt';
 
 const updateUser = async (
   id: string,
@@ -36,7 +39,7 @@ const deleteUser = async (id: string, user: any): Promise<IUserProfile | null> =
 };
 
 const getUserProfile = async (id: string): Promise<IUserProfile | null> => {
-  const result = await User.findById(id);
+  const result = await User.findById({_id:id});
 
   if (!result) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
@@ -50,6 +53,15 @@ const getAllUser = async (): Promise<IUserProfile[]> => {
 
   return result;
 };
+
+
+
+
+
+
+
+
+
 
 //! super_admin----------------------------------------------------------------
 // change role user to admin, admin to user
@@ -76,5 +88,6 @@ export const UserServices = {
   getUserProfile,
   getAllUser,
   deleteUser,
-  changeRole
+  changeRole,
+  
 };

@@ -1,38 +1,7 @@
 import { Schema, model } from 'mongoose';
-import { IService, IWeeklySchedule } from './service.interface';
+import { IService } from './service.interface';
 
-const weeklyScheduleSchema = new Schema<IWeeklySchedule>({
-  days: [
-    {
-      type: String,
-      enum: [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday',
-      ],
-    },
-  ],
-  seats: {
-    type: Number,
-    default: 0,
-  },
-  enrolled: {
-    type: Number,
-    default: 0,
-  },
-  isAvailable: {
-    type: Boolean,
-    default: true,
-  },
-  classtime: {
-    type: String,
-    required: true,
-  },
-});
+
 
 const serviceSchema = new Schema<IService>(
   {

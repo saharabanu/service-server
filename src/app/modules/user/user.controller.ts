@@ -1,3 +1,4 @@
+import { User } from './user.model';
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Request, RequestHandler, Response } from 'express';
 import httpStatus from 'http-status';
@@ -69,6 +70,12 @@ const getAllUser: RequestHandler = catchAsync(
   }
 );
 
+
+
+
+
+
+
 //! super_admin----------------------------------------------------------------
 const changeRole: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
@@ -90,5 +97,5 @@ export const UserControllers = {
   deleteUser,
   getUserProfile,
   getAllUser,
-  changeRole,
-};
+  changeRole}
+ 

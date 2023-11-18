@@ -8,21 +8,24 @@ import cookieParser from 'cookie-parser';
 
 const app: Application = express();
 
-// app.use(cors());
+
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin:['http://localhost:3000','https://hotel-booking-rosy.vercel.app' ],
     credentials: true,
   })
 );
 app.use(cookieParser());
+// app.use(cors());
 
 //parser
 app.use(express.json());
+// app.use(cookieParser());
+
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.send('Welcome to Elite Educator Server Side');
+  res.send('Welcome to  Server Side');
 });
 app.use('/api/v1', routes);
 

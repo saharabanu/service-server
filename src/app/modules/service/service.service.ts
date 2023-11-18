@@ -48,6 +48,8 @@ const deleteService = async (id: string): Promise<IService | null> => {
   return result;
 };
 
+
+
 const getAllService = async (
   filters: IServiceFilters,
   paginationOptions: IPaginationOptions
@@ -57,38 +59,37 @@ const getAllService = async (
 
   const {
     searchTerm,
-    rating: ratingData,
-    minPrice,
-    maxPrice,
-    isAvailable,
+    
+    price,
+    
     ...filtersData
   } = filters;
 
   const andConditions = [];
 
-  if (minPrice) {
-    andConditions.push({
-      price: {
-        $gte: parseFloat(minPrice.toString()),
-      },
-    });
-  }
+  // if (minPrice) {
+  //   andConditions.push({
+  //     price: {
+  //       $gte: parseFloat(minPrice.toString()),
+  //     },
+  //   });
+  // }
 
-  if (maxPrice) {
-    andConditions.push({
-      price: {
-        $lte: parseFloat(maxPrice.toString()),
-      },
-    });
-  }
+  // if (maxPrice) {
+  //   andConditions.push({
+  //     price: {
+  //       $lte: parseFloat(maxPrice.toString()),
+  //     },
+  //   });
+  // }
 
-  if (ratingData) {
-    const minRating = parseFloat(ratingData.toString());
-    const maxRating = minRating + 1;
-    andConditions.push({
-      $and: [{ rating: { $gte: minRating } }, { rating: { $lt: maxRating } }],
-    });
-  }
+  // if (ratingData) {
+  //   const minRating = parseFloat(ratingData.toString());
+  //   const maxRating = minRating + 1;
+  //   andConditions.push({
+  //     $and: [{ rating: { $gte: minRating } }, { rating: { $lt: maxRating } }],
+  //   });
+  // }
 
   //  partial match
   if (searchTerm) {
@@ -110,11 +111,11 @@ const getAllService = async (
     });
   }
 
-  if (isAvailable !== undefined) {
-    andConditions.push({
-      'weeklySchedules.isAvailable': isAvailable,
-    });
-  }
+  // if (isAvailable !== undefined) {
+  //   andConditions.push({
+  //     'weeklySchedules.isAvailable': isAvailable,
+  //   });
+  // }
 
 
   const sortConditions: { [key: string]: SortOrder } = {};
@@ -144,6 +145,11 @@ const getAllService = async (
     data: result,
   };
 };
+
+
+
+
+
 
 export const ServiceServices = {
   createService,
